@@ -35,7 +35,13 @@ public class MainController {
             return "No such order with id " + id;
         }
         orderRepository.deleteById(id);
-        return "Succes, you deleted order: " + deletedOrder.get();
+        return "Success, you deleted order: " + deletedOrder.get();
 
+    }
+
+    @PostMapping("/clear")
+    public String clearOrders(){
+        orderRepository.clearAll();
+        return "Success";
     }
 }
