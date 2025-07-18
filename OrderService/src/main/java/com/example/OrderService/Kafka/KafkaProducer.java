@@ -20,7 +20,7 @@ public class KafkaProducer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public Order sendMessage(Order order){
+    public String createOrder(Order order){
         Order savedOrder = orderRepository.save(order);
 
         OrderCreatedEvent event = new OrderCreatedEvent();
@@ -28,8 +28,8 @@ public class KafkaProducer {
         event.setProductName(savedOrder.getProductName());
         event.setCreatedAt(LocalDateTime.now());
 
-        kafkaTemplate.send("order_created", event);
+        kafkaTemplate.send("OrderCreated", event);
 
-        return savedOrder;
+        return "Success";
     }
 }

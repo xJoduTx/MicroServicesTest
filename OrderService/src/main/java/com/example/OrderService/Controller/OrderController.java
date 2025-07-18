@@ -16,7 +16,7 @@ public class OrderController {
     }
 
     @PostMapping("/orders")
-    public Order createOrder(@RequestBody Order order) {
-        return kafkaProducer.sendMessage(order);
+    public String createOrderPoint(@RequestBody Order order) {
+        return kafkaProducer.createOrder(order);
     }
 }
